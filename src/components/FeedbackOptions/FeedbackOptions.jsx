@@ -4,17 +4,17 @@ import { FeedbackList, FeedbackButton } from './FeedbackOptions.styled';
 const FeedbackOptions = ({ onGood, onNeutral, onBad }) => (
   <FeedbackList>
     <li>
-      <FeedbackButton type="button" onClick={onGood}>
+      <FeedbackButton type="button" onClick={onGood} hoverColor='green'>
         Good
       </FeedbackButton>
     </li>
     <li>
-      <FeedbackButton type="button" onClick={onNeutral}>
+      <FeedbackButton type="button" onClick={onNeutral} hoverColor='yellow'>
         Neutral
       </FeedbackButton>
     </li>
     <li>
-      <FeedbackButton type="button" onClick={onBad}>
+      <FeedbackButton type="button" onClick={onBad} hoverColor='red'>
         Bad
       </FeedbackButton>
     </li>
