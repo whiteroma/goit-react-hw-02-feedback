@@ -4,12 +4,12 @@ import { FeedbackList, FeedbackButton } from './FeedbackOptions.styled';
 const FeedbackOptions = ({ onGood, onNeutral, onBad }) => (
   <FeedbackList>
     <li>
-      <FeedbackButton type="button" onClick={onGood} hoverColor='green'>
+      <FeedbackButton type="button" onClick={onGood} hoverColor='lime'>
         Good
       </FeedbackButton>
     </li>
     <li>
-      <FeedbackButton type="button" onClick={onNeutral} hoverColor='yellow'>
+      <FeedbackButton type="button" onClick={onNeutral} hoverColor='gold'>
         Neutral
       </FeedbackButton>
     </li>

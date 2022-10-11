@@ -13,11 +13,13 @@ font-size: 16px;
   border-radius: 10%;
     border-style:none;
   cursor: pointer;
-    color: #0400ff;
+    color: aqua;
     font-weight: bold;
+    background-color: #044152ab;
 
   :hover {
     /* background-color: #0e1df0; */
+    color: ${p => p.hoverColor};
     box-shadow: 0px 0px 4px 3px ${p => p.hoverColor}
   }
 `;
