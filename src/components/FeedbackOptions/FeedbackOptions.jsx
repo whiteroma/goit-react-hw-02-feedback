@@ -1,30 +1,25 @@
 import PropTypes from 'prop-types';
-import { FeedbackList, FeedbackButton } from './FeedbackOptions.styled';
+import { FeedbackButton, FeedbackList } from './FeedbackOptions.styled';
 
-const FeedbackOptions = ({ onGood, onNeutral, onBad }) => (
+const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <FeedbackList>
-    <li>
-      <FeedbackButton type="button" onClick={onGood} hoverColor='lime'>
-        Good
+    {options.map(option => (
+      <FeedbackButton
+        type="button"
+        key={option}
+        onClick={() => onLeaveFeedback(option)}
+      >
+        {option}
       </FeedbackButton>
-    </li>
-    <li>
-      <FeedbackButton type="button" onClick={onNeutral} hoverColor='gold'>
-        Neutral
-      </FeedbackButton>
-    </li>
-    <li>
-      <FeedbackButton type="button" onClick={onBad} hoverColor='red'>
-        Bad
-      </FeedbackButton>
-    </li>
+    ))}
   </FeedbackList>
 );
 
 FeedbackOptions.propTypes = {
-  onGood: PropTypes.func.isRequired,
-  onNeutral: PropTypes.func.isRequired,
-  onBad: PropTypes.func.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.shape({
+    option: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default FeedbackOptions;

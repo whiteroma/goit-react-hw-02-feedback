@@ -9,68 +9,47 @@ export class App extends React.Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    percentage: 0,
-    visible: false,
   };
 
-  onGood = () => {
-    this.setState(prev => ({
-      good: prev.good + 1,
-      visible: true,
+  onFeedback = option => {
+    this.setState(prevState => ({
+      [option]: prevState[option] + 1,
     }));
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
-  };
-
-  onNeutral = () => {
-    this.setState(prev => ({
-      neutral: prev.neutral + 1,
-      visible: true,
-    }));
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
-  };
-
-  onBad = () => {
-    this.setState(prev => ({
-      bad: prev.bad + 1,
-      visible: true,
-    }));
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
   };
 
   countTotalFeedback = () => {
-    this.setState(prev => ({
-      total: prev.bad + prev.good + prev.neutral,
-    }));
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   };
 
   countPositiveFeedbackPercentage = () => {
-    this.setState(prev => ({
-      percentage: Math.round((prev.good * 100) / prev.total),
-    }));
+    const { good, neutral, bad } = this.state;
+    const total = good + neutral + bad;
+    return Math.round((good * 100) / total) || 0;
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const percentage = this.countPositiveFeedbackPercentage();
+    const options = Object.keys(this.state);
+
     return (
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            onGood={this.onGood}
-            onNeutral={this.onNeutral}
-            onBad={this.onBad}
+            options={options}
+            onLeaveFeedback={this.onFeedback}
           />
         </Section>
         <Section title="Statistics">
-          {this.state.visible ? (
+          {total > 0 ? (
             <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
-              total={this.state.total}
-              percentage={this.state.percentage}
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              percentage={percentage}
             />
           ) : (
             <Notification message="There is no feedback" />
